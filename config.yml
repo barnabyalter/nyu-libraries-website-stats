@@ -1,0 +1,64 @@
+---
+lastmodified:
+  servers:
+    -
+      input_file: "raw/lastmodified-windsor2.bobst.txt"
+      output_file: "reports/lastmodifiedover1year-windsor2.bobst.csv"
+      absolute_prefix: "/web/library.nyu.edu/htdocs"
+    -
+      input_file: "raw/lastmodified-altamont.bobst.txt"
+      output_file: "reports/lastmodifiedover1year-altamont.bobst.csv"
+      absolute_prefix: "/web/library.nyu.edu/htdocs"
+    -
+      input_file: "raw/lastmodified-nyu.edu.txt"
+      output_file: "reports/lastmodifiedover1year-nyu.edu.csv"
+      absolute_prefix: "/www/sites/nyu.edu/htdocs"
+    -
+      input_file: "raw/lastmodified-libweb.bobst.txt"
+      output_file: "reports/lastmodifiedover1year-libweb.bobst.csv"
+      absolute_prefix: "/web/www.libweb.nyu.edu/htdocs"
+lasthit: 
+  servers:
+    -
+      input_lasthit: "raw/lasthit-altamont.bobst.txt"
+      input_allfiles: "raw/allfiles-altamont.bobst.txt"
+      output_file: "reports/lasthitover1year-altamont.bobst.csv"
+      absolute_prefix: "/web/library.nyu.edu/htdocs"
+      apache_conf: 
+        absolute_prefix: "/web/library.nyu.edu/htdocs"
+        conf_file: "raw/vhosts-shared.conf"
+        redirect_url_prefix: "library.nyu.edu"
+    -
+      input_lasthit: "raw/lasthit-windsor2.bobst.txt"
+      input_allfiles: "raw/allfiles-windsor2.bobst.txt"
+      output_file: "reports/lasthitover1year-windsor2.bobst.csv"
+      absolute_prefix: "/web/library.nyu.edu/htdocs"
+      apache_conf: 
+        absolute_prefix: "/web/library.nyu.edu/htdocs"
+        conf_file: "raw/vhosts-shared.conf"
+        redirect_url_prefix: "library.nyu.edu"
+    -
+      input_lasthit: "raw/lasthit-libweb.bobst.txt"
+      input_allfiles: "raw/allfiles-libweb.bobst.txt"
+      output_file: "reports/lasthitover1year-libweb.bobst.csv"
+      absolute_prefix: "/web/www.libweb.nyu.edu/htdocs"
+googlesearch:
+  files:
+    -
+      input_file: "raw/report_jim-Lib-1-noresults.xml"
+      output_file: "reports/googlesearch_noresults.csv"
+    -
+      input_file: "raw/report_jim-Lib-1-results.xml"
+      output_file: "reports/googlesearch_results.csv"
+merge_library_servers:
+  files:
+    -
+      merge_files:
+        - "reports/lasthitover1year-altamont.bobst.csv"
+        - "reports/lasthitover1year-windsor2.bobst.csv"
+      output_file: "reports/lasthitover1year-library.nyu.edu.csv"
+    -
+      merge_files:
+        - "reports/lastmodifiedover1year-altamont.bobst.csv"
+        - "reports/lastmodifiedover1year-windsor2.bobst.csv"
+      output_file: "reports/lastmodifiedover1year-library.nyu.edu.csv"

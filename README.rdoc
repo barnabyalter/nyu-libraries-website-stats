@@ -1,0 +1,59 @@
+A rake script to generate CSV reports from raw log files. Run bundle install before running rake.
+
+  bundle install
+  rake
+
+Default rake runs all tasks and generates reports from raw/ folder into reports/ folder. Each task is outlined below.
+
+Several reports are generated from 3 types of data:
+
+* List of keywords and query terms from the Google site search
+* List of the files not modified for over a year
+* List of the files not hit for over a year
+
+=Rake tasks
+
+== Last modified over one year ago
+
+  rake library_stats:lastmodifiedover1year
+
+Takes input of files last modified over a year ago and produces a CSV output in the following form:
+
+  Filename, Date modified, File type
+  "/path/to/file.html", 1970 Jan 1, HTML
+  ...
+
+The input file is generated from the command-line call:
+
+  find $PWD -type f -mtime +365 -exec ls -lrt {} \;|awk '{printf "%s\t%s %s %s\n", $9, $8, $6, $7}'>lastmodified-servername.txt
+
+== Last hit over one year ago
+
+  rake library_stats:lasthitover1year
+
+Compare the files hit in the past year with all the files on the server deleting the files which were hit. The remaining files are those which haven't been hit in over a year. This task takes into account Apache level aliases and redirects (not including complex RegEx matches) and equates root folder hits to the /index.* equivalent. The output is in the following form:
+
+  Filename, File type
+  "/path/to/file.html", HTML
+  ...
+
+The input with all files is generated from the command-line call:
+
+  find $PWD -type f>allfiles-servername.txt
+
+== Site Google search with and without results
+
+  rake library_stats:google_terms_to_csv
+
+Reads raw XML files with lists of keywords and query terms from Google site search and formats as CSV with only relevant data. There are two input XML files, one with searches that returned results and one that returned none. The output is in the following form:
+
+  Search type, Search term, Number of times searched
+  keyword, library, 57
+  ...
+  query, division of libraries, 65
+  ...
+
+== Merge load balanced servers
+
+Performs a union between two or more load balanced server reports into one.
+
