@@ -55,5 +55,5 @@ Reads raw XML files with lists of keywords and query terms from Google site sear
 
 == Merge load balanced servers
 
-Performs a union between two or more load balanced server reports into one.
+Performs a union between two or more load balanced server reports.
 
