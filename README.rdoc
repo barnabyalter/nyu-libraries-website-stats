@@ -27,6 +27,10 @@ The input file is generated from the command-line call:
 
   find $PWD -type f -mtime +365 -exec ls -lrt {} \;|awk '{printf "%s\t%s %s %s\n", $9, $8, $6, $7}'>lastmodified-servername.txt
 
+To get a fuller report as CSV without the last-modified parameter, simply run:
+
+  find . -type f -exec ls -lrt {} \;|awk '{printf "%s,%s %s %s\n", $9, $8, $6, $7}'>library-nyu-edu-all-files.csv
+
 == Last hit over one year ago
 
   rake library_stats:lasthitover1year
